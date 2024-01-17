@@ -62,6 +62,32 @@ df %>%
 
 
 # top 5 tallest overall - using slice_head
+df %>% 
+  arrange(desc(height)) %>% 
+  slice_head(n=5)
+
+df %>% 
+  arrange(mass) %>% 
+  slice_head(n=3)
+
+df %>% 
+  slice_min(mass, n=5)
+
+df %>% 
+  slice_sample(prop = .1) #this gives a proportion so .1 will give 10% of the total rows
+
+df %>% 
+  slice_max(mass, n=5) #requires to think about ties, 
+
+df %>% 
+  slice_min(skin_color, n=1, with_ties = F) #go study what ties are
+
+df %>% 
+  group_by(species) %>% 
+  slice_min(mass, n = 1, with_ties = F) %>% 
+  group_by(sex) %>% 
+  summarize(avg_height = mean(height, na.rm = T))  #double grouping is usually when you want only a few from each group or create some kind of average
+
 
 
 # or just using slice_max
